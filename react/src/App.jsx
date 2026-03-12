@@ -82,8 +82,10 @@ function App() {
                 <div className="absolute inset-0 m-auto w-3/4 h-full bg-gradient-to-r from-indigo-500/0 via-purple-500/20 to-pink-500/0 blur-2xl rounded-full scale-150 animate-pulse pointer-events-none"></div>
               </span>
 
-              <span className="animate-in fade-in slide-in-from-top-4 duration-1000 flex items-center gap-4">
-                <span className="text-slate-300 dark:text-slate-600">Tools</span>
+              <span className="animate-in fade-in slide-in-from-top-4 duration-1000 flex items-center gap-4 py-2">
+                <span className="h-[2px] w-8 md:w-16 bg-gradient-to-r from-transparent to-slate-200 dark:to-slate-800"></span>
+                <span className="text-slate-400 dark:text-slate-500 font-bold tracking-widest text-lg md:text-xl">TOOLS</span>
+                <span className="h-[2px] w-8 md:w-16 bg-gradient-to-l from-transparent to-slate-200 dark:to-slate-800"></span>
               </span>
             </h1>
             <p className="text-xl md:text-2xl font-medium text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed animate-in fade-in duration-1000 delay-500">

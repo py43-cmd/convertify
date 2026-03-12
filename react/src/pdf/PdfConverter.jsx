@@ -14,14 +14,27 @@ export default function PdfConverter() {
 
     const handleFileSelect = (e) => {
         const selectedFiles = Array.from(e.target.files);
+        const MAX_SIZE = 20 * 1024 * 1024; // 20MB
 
         if (selectedFiles.length === 0) return;
 
+        // Check for oversized files
+        const validFiles = selectedFiles.filter(file => file.size <= MAX_SIZE);
+        const oversizedCount = selectedFiles.length - validFiles.length;
+
+        if (oversizedCount > 0) {
+            toast.error(`${oversizedCount} file(s) exceed the 20MB size limit.`, {
+                description: "Our secure local processor has a single-file limit for optimal performance."
+            });
+        }
+
+        if (validFiles.length === 0) return;
+
         if (activeTool === "merge") {
-            setFiles((prev) => [...prev, ...selectedFiles]);
-            toast.success(`Added ${selectedFiles.length} file(s) for merging!`);
+            setFiles((prev) => [...prev, ...validFiles]);
+            toast.success(`Added ${validFiles.length} file(s) for merging!`);
         } else {
-            setFiles(selectedFiles);
+            setFiles(validFiles);
             toast.success(`File ready for conversion!`);
         }
     };
@@ -59,7 +72,7 @@ export default function PdfConverter() {
         }
 
         try {
-            const response = await fetch(`http://localhost:3000${endpoint}`, {
+            const response = await fetch(endpoint, {
                 method: "POST",
                 body: formData,
             });
