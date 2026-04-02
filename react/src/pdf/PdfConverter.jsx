@@ -58,16 +58,17 @@ export default function PdfConverter() {
         const id = toast.loading("Uploading and processing your files...");
 
         const formData = new FormData();
+        const BASE_URL = "https://convertify-1.onrender.com";
         let endpoint = "";
 
         if (activeTool === "merge") {
-            endpoint = "/api/merge";
+            endpoint = `${BASE_URL}/api/merge`;
             files.forEach((file) => formData.append("files", file));
         } else if (activeTool === "word-to-pdf") {
-            endpoint = "/api/word-to-pdf";
+            endpoint = `${BASE_URL}/api/word-to-pdf`;
             formData.append("file", files[0]);
         } else if (activeTool === "pdf-to-word") {
-            endpoint = "/api/pdf-to-word";
+            endpoint = `${BASE_URL}/api/pdf-to-word`;
             formData.append("file", files[0]);
         }
 
