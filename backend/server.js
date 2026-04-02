@@ -14,7 +14,7 @@ import ConvertApi from 'convertapi';
 import { promisify } from 'util';
 import os from 'os';
 
-const libreConvert = promisify(libre.convert);
+const libreConvert = promisify(libre.convertWithOptions);
 // Initialize ConvertAPI (Evaluation key)
 const convertapi = new ConvertApi('1V00t73eXfW88MPr');
 
@@ -205,7 +205,8 @@ app.post('/api/word-to-pdf', upload.single('file'), async (req, res) => {
             // TIER 2: SYSTEM LOCAL (LibreOffice)
             try {
                 const docxBuffer = fs.readFileSync(req.file.path);
-                const pdfBuffer = await libreConvert(docxBuffer, '.pdf', undefined);
+                const ext = path.extname(req.file.originalname) || '.docx';
+                const pdfBuffer = await libreConvert(docxBuffer, '.pdf', undefined, { fileName: `document${ext}` });
                 fs.writeFileSync(outputPath, pdfBuffer);
 
                 return res.download(outputPath, `${path.parse(req.file.originalname).name}.pdf`, () => {
@@ -215,7 +216,8 @@ app.post('/api/word-to-pdf', upload.single('file'), async (req, res) => {
             } catch (libreError) {
                 // TIER 3: CLOUD (ConvertAPI)
                 try {
-                    const result = await convertapi.convert('pdf', { File: req.file.path }, 'doc');
+                    const extFormat = path.extname(req.file.originalname).replace('.', '') || 'docx';
+                    const result = await convertapi.convert('pdf', { File: req.file.path }, extFormat);
                     await result.saveFiles(outputPath);
                     return res.download(outputPath, `${path.parse(req.file.originalname).name}.pdf`, () => {
                         safeUnlink(req.file.path);

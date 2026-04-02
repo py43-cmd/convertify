@@ -88,7 +88,7 @@ export default function PdfConverter() {
             const a = document.createElement("a");
             a.href = url;
 
-            const ext = activeTool === "pdf-to-word" ? ".doc" : ".pdf";
+            const ext = activeTool === "pdf-to-word" ? ".docx" : ".pdf";
             const defaultName = activeTool === "merge" ? "merged_document" : (files[0].name.split(".")[0] + "_converted");
 
             a.download = defaultName + ext;
