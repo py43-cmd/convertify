@@ -58,7 +58,7 @@ export default function PdfConverter() {
         const id = toast.loading("Uploading and processing your files...");
 
         const formData = new FormData();
-        const BASE_URL = "https://convertify-1.onrender.com";
+        const BASE_URL = "http://localhost:3000"; // Test locally first!
         let endpoint = "";
 
         if (activeTool === "merge") {
