@@ -9,10 +9,9 @@ const outputDir = path.join(os.tmpdir(), 'outputs');
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
 
-// Set up Multer for file uploads with a 1000MB limit
+// Set up Multer for file uploads
 const upload = multer({
-    dest: uploadDir,
-    limits: { fileSize: 1000 * 1024 * 1024 } // 1000MB limit
+    dest: uploadDir
 });
 
 // Helper to safely delete files

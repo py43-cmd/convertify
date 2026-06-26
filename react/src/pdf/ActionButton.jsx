@@ -10,7 +10,6 @@ export default function ActionButton({ files, loading, handleConvert, activeTool
         if (activeTool === 'word-to-pdf') return 'bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 shadow-purple-500/25';
         return 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 shadow-pink-500/25';
     };
-
     return (
         <div className="pt-2 animate-in fade-in slide-in-from-bottom-2 duration-300">
             <Button
@@ -19,6 +18,7 @@ export default function ActionButton({ files, loading, handleConvert, activeTool
                 onClick={handleConvert}
                 className={`w-full h-14 mt-4 text-white text-[15px] font-bold tracking-wide shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl active:scale-[0.98] rounded-[14px] border-0
                     ${getGradient()}
+                    disabled:opacity-100 disabled:text-white disabled:cursor-not-allowed
                 `}
             >
                 {loading ? (

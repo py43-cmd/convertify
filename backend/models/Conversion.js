@@ -18,11 +18,16 @@ const conversionSchema = new mongoose.Schema({
         default: 'success'
     },
     fileSize: {
-        type: Number, // Optional: Storing size in bytes
+        type: Number, 
         required: false,
     },
     ipAddress: {
-        type: String, // Useful if you have no login system but want to limit conversions per user
+        type: String, 
+        required: false,
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: false,
     },
     createdAt: {

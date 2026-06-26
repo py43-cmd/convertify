@@ -18,20 +18,20 @@ const Toaster = ({
       theme={theme}
       className="toaster group"
       icons={{
-        success: <CircleCheckIcon className="size-4" />,
-        info: <InfoIcon className="size-4" />,
-        warning: <TriangleAlertIcon className="size-4" />,
-        error: <OctagonXIcon className="size-4" />,
-        loading: <Loader2Icon className="size-4 animate-spin" />,
+        success: <CircleCheckIcon className="size-4 text-emerald-500 dark:text-emerald-400" />,
+        info: <InfoIcon className="size-4 text-indigo-500 dark:text-indigo-400" />,
+        warning: <TriangleAlertIcon className="size-4 text-amber-500 dark:text-amber-400" />,
+        error: <OctagonXIcon className="size-4 text-red-500 dark:text-red-400" />,
+        loading: <Loader2Icon className="size-4 animate-spin text-indigo-600 dark:text-indigo-400" />,
       }}
-      style={
-        {
-          "--normal-bg": "var(--popover)",
-          "--normal-text": "var(--popover-foreground)",
-          "--normal-border": "var(--border)",
-          "--border-radius": "var(--radius)"
+      toastOptions={{
+        classNames: {
+          toast: "group-[.toaster]:bg-white dark:group-[.toaster]:bg-slate-900 group-[.toaster]:text-slate-900 dark:group-[.toaster]:text-slate-100 group-[.toaster]:border-slate-200 dark:group-[.toaster]:border-slate-800 group-[.toaster]:shadow-lg rounded-[14px]",
+          description: "group-[.toast]:text-slate-500 dark:group-[.toast]:text-slate-400",
+          actionButton: "group-[.toast]:bg-indigo-600 group-[.toast]:text-white",
+          cancelButton: "group-[.toast]:bg-slate-100 group-[.toast]:text-slate-900",
         }
-      }
+      }}
       {...props} />
   );
 }

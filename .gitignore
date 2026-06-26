@@ -8,3 +8,7 @@ backend/node_modules/
 backend/uploads/
 backend/outputs/
 .vercel
+
+# Environment secrets — never commit these!
+backend/.env
+.env
