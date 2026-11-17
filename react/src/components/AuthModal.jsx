@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import { toast } from "sonner";
+import { apiUrl } from "@/lib/api";
 
 export default function AuthModal({ mode, onClose, onSuccess, onSwitchMode }) {
   const [name, setName] = useState("");
@@ -11,14 +12,14 @@ export default function AuthModal({ mode, onClose, onSuccess, onSwitchMode }) {
   const isSignup = mode === "signup";
   const title = isSignup ? "Create your account" : "Welcome back";
   const subtitle = isSignup
-    ? "Sign up to save your work — or skip and use tools as a guest."
-    : "Log in to your account — guest access still works without signing in.";
+    ? "Create an account to unlock conversion and merge tools."
+    : "Log in to unlock conversion and merge tools.";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const endpoint = isSignup ? "/api/auth/register" : "/api/auth/login";
+    const endpoint = apiUrl(isSignup ? "/api/auth/register" : "/api/auth/login");
     const body = isSignup ? { name, email, password } : { email, password };
 
     try {
@@ -32,7 +33,7 @@ export default function AuthModal({ mode, onClose, onSuccess, onSwitchMode }) {
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        throw new Error(data.error || "Something went wrong");
+        throw new Error(data.message || data.error || "Something went wrong");
       }
 
       toast.success(isSignup ? "Account created!" : "Logged in successfully!");
@@ -46,7 +47,7 @@ export default function AuthModal({ mode, onClose, onSuccess, onSwitchMode }) {
   };
 
   const handleGoogleAuth = () => {
-    window.location.href = "http://localhost:3000/api/auth/google";
+    window.location.href = apiUrl("/api/auth/google");
   };
 
   return (

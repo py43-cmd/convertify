@@ -1,9 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { UploadCloud } from "lucide-react";
+import { TOOL_ACCEPT } from "@/lib/download";
 
 export default function UploadCard({ activeTool, handleFileSelect }) {
     const isMultiple = activeTool === "merge";
-    const acceptedFiles = activeTool === "merge" || activeTool === "pdf-to-word" ? ".pdf" : ".doc,.docx";
+    const acceptedFiles = TOOL_ACCEPT[activeTool] || "";
 
     return (
         <Card className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 hover:bg-indigo-50/50 dark:hover:border-indigo-500/80 dark:hover:bg-indigo-950/20 transition-all duration-300 group rounded-[20px] overflow-hidden cursor-pointer bg-white/40 dark:bg-slate-900/40 shadow-sm relative">
@@ -13,7 +14,11 @@ export default function UploadCard({ activeTool, handleFileSelect }) {
                     multiple={isMultiple}
                     accept={acceptedFiles}
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                    onChange={handleFileSelect}
+                    onChange={(event) => {
+                        handleFileSelect(event);
+                        // Allow re-selecting the same file.
+                        event.target.value = "";
+                    }}
                     title=""
                 />
 

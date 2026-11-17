@@ -1,9 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { toast } from "sonner";
 import "./index.css";
 import PdfConverter from "./pdf/PdfConverter";
-import AuthModal from "./components/AuthModal";
+import { apiUrl } from "./lib/api";
 import { Sparkles, LogOut, ChevronDown, User } from "lucide-react";
+
+// Auth modal is only needed after a user clicks Log in / Sign up.
+const AuthModal = lazy(() => import("./components/AuthModal"));
 
 const words = ["PDF", "Word", "MergePDF", "Document"];
 
@@ -25,7 +28,7 @@ function App() {
 
   // Check if a session is active on mount
   useEffect(() => {
-    fetch("/api/auth/user", { credentials: "include" })
+    fetch(apiUrl("/api/auth/user"), { credentials: "include" })
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         setUser(data);
@@ -54,7 +57,7 @@ function App() {
   }, []);
 
   const handleLogout = async () => {
-    await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+    await fetch(apiUrl("/api/auth/logout"), { method: "POST", credentials: "include" });
     setUser(null);
     setProfileOpen(false);
   };
@@ -84,9 +87,9 @@ function App() {
 
           {/* Nav */}
           <nav className="hidden md:flex items-center gap-8 text-base font-bold text-slate-700 dark:text-slate-200">
-            <a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Tools</a>
-            <a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Pricing</a>
-            <a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">API</a>
+            <a href="#tools" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Tools</a>
+            <span className="cursor-default">Pricing</span>
+            <span className="cursor-default">API</span>
           </nav>
 
           {/* Auth Section */}
@@ -133,7 +136,7 @@ function App() {
                 )}
               </div>
             ) : (
-              /* ── Logged-out: Login / Sign up (optional — tools work without account) ── */
+              /* ── Logged-out: Login / Sign up ── */
               <div className="flex items-center gap-2 sm:gap-3">
                 <button
                   id="login-btn"
@@ -166,7 +169,7 @@ function App() {
 
       {/* ─── Main ───────────────────────────────────────────────────────────── */}
       <main className="flex-1 w-full flex flex-col items-center justify-center p-6 py-16 md:py-28 relative z-10">
-        <div className="w-full max-w-4xl relative z-10">
+        <div id="tools" className="w-full max-w-4xl relative z-10 scroll-mt-28">
           <div className="text-center mb-16 space-y-6">
             <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-slate-900 dark:text-white leading-[1.1] flex flex-col justify-center items-center uppercase py-4">
               <span className="animate-in fade-in slide-in-from-bottom-4 duration-1000">Powerful</span>
@@ -195,7 +198,7 @@ function App() {
 
               <span className="animate-in fade-in slide-in-from-top-4 duration-1000 flex items-center gap-4 py-2">
                 <span className="h-[2px] w-8 md:w-16 bg-gradient-to-r from-transparent to-slate-200 dark:to-slate-800"></span>
-                <span className="text-slate-400 dark:text-slate-500 font-bold tracking-widest text-lg md:text-xl">TOOLS</span>
+                <span className="text-slate-600 dark:text-slate-300 font-bold tracking-widest text-lg md:text-xl">TOOLS</span>
                 <span className="h-[2px] w-8 md:w-16 bg-gradient-to-l from-transparent to-slate-200 dark:to-slate-800"></span>
               </span>
             </h1>
@@ -241,42 +244,44 @@ function App() {
               </p>
             </div>
             <div className="space-y-5">
-              <h4 className="font-bold text-slate-900 dark:text-white">Product</h4>
+              <h2 className="font-bold text-slate-900 dark:text-white">Product</h2>
               <ul className="space-y-3 text-sm font-medium text-slate-500 dark:text-slate-400">
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors hover:translate-x-1 inline-block duration-200">Tools</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors hover:translate-x-1 inline-block duration-200">Pricing</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors hover:translate-x-1 inline-block duration-200">Enterprise</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors hover:translate-x-1 inline-block duration-200">Developer API</a></li>
+                <li><a href="#tools" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors hover:translate-x-1 inline-block duration-200">Tools</a></li>
+                <li><span className="inline-block">Pricing</span></li>
+                <li><span className="inline-block">Enterprise</span></li>
+                <li><span className="inline-block">Developer API</span></li>
               </ul>
             </div>
             <div className="space-y-5">
-              <h4 className="font-bold text-slate-900 dark:text-white">Company</h4>
+              <h2 className="font-bold text-slate-900 dark:text-white">Company</h2>
               <ul className="space-y-3 text-sm font-medium text-slate-500 dark:text-slate-400">
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors hover:translate-x-1 inline-block duration-200">About Us</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors hover:translate-x-1 inline-block duration-200">Blog</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors hover:translate-x-1 inline-block duration-200">Careers</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors hover:translate-x-1 inline-block duration-200">Contact</a></li>
+                <li><span className="inline-block">About Us</span></li>
+                <li><span className="inline-block">Blog</span></li>
+                <li><span className="inline-block">Careers</span></li>
+                <li><span className="inline-block">Contact</span></li>
               </ul>
             </div>
           </div>
           <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-slate-200/50 dark:border-slate-800/50 text-sm font-medium text-slate-500 dark:text-slate-400">
             <p>© {new Date().getFullYear()} Convertify Inc. All rights reserved.</p>
             <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors">Cookies</a>
+              <span>Terms of Service</span>
+              <span>Privacy Policy</span>
+              <span>Cookies</span>
             </div>
           </div>
         </div>
       </footer>
 
       {authModal && (
-        <AuthModal
-          mode={authModal}
-          onClose={() => setAuthModal(null)}
-          onSuccess={setUser}
-          onSwitchMode={setAuthModal}
-        />
+        <Suspense fallback={null}>
+          <AuthModal
+            mode={authModal}
+            onClose={() => setAuthModal(null)}
+            onSuccess={setUser}
+            onSwitchMode={setAuthModal}
+          />
+        </Suspense>
       )}
     </div>
   );

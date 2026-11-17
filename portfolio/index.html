@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priyanshu — Full Stack Developer</title>
+  <meta name="description" content="Priyanshu is a full-stack developer building secure, scalable web apps with React, Node.js, MongoDB, and a little AI." />
+  <meta name="theme-color" content="#07070a" />
+
+  <meta property="og:title" content="Priyanshu — Full Stack Developer" />
+  <meta property="og:description" content="React, Node.js, MongoDB, and a little AI. Selected work: DevFlow AI, Skill Up, Convertify." />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23c9f75a'/%3E%3Ctext x='32' y='45' font-family='monospace' font-size='38' font-weight='700' text-anchor='middle' fill='%230a0a0a'%3EP%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+    <div class="blob blob-c"></div>
+  </div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="nav-wrap" id="navWrap">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Priyanshu — home">
+        <span class="brand-mark">P</span>
+        <span>priyanshu<span class="brand-dot">.</span>dev</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#stack">Stack</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to light theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+
+        <button class="cmd-btn" id="paletteBtn" type="button" aria-haspopup="dialog" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3z"/></svg>
+          <span>Menu</span>
+          <kbd>Ctrl</kbd><kbd>K</kbd>
+        </button>
+
+        <button class="icon-btn nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ───────────────────────── HERO ───────────────────────── -->
+    <section class="hero container" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow reveal"><span class="status-dot"></span> Full-stack developer · final-year CS</p>
+
+        <h1 class="reveal" style="--d:.06s">
+          Hi, I'm<br />
+          <span class="gradient-text">Priyanshu.</span>
+        </h1>
+
+        <p class="role-line reveal" style="--d:.12s">
+          <span class="prompt">&gt;</span> I build <span id="role" class="role">web applications</span><span class="caret" aria-hidden="true"></span>
+        </p>
+
+        <p class="lede reveal" style="--d:.18s">
+          A developer who likes the messy middle — auth flows, file pipelines, payments,
+          and AI that has to stay grounded. React on the surface, Node underneath,
+          and an unhealthy amount of attention to detail.
+        </p>
+
+        <div class="hero-actions reveal" style="--d:.24s">
+          <a class="btn btn-primary" href="#work">
+            Explore my work
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="mailto:py431035@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Let's talk
+          </a>
+        </div>
+
+        <div class="hero-meta reveal" style="--d:.3s">
+          <a href="https://github.com/py43-cmd" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <span class="meta-sep">/</span>
+          <button class="link-btn" type="button" data-copy="py431035@gmail.com">Copy email</button>
+          <span class="meta-sep">/</span>
+          <span>Open to internships</span>
+        </div>
+
+        <div class="stats reveal" style="--d:.36s">
+          <div class="stat"><strong>03</strong><span>featured builds</span></div>
+          <div class="stat"><strong>MERN</strong><span>daily driver</span></div>
+          <div class="stat"><strong>AI</strong><span>currently exploring</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" style="--d:.2s">
+        <div class="code-window">
+          <div class="code-bar">
+            <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+            <span class="code-file">priyanshu.js</span>
+            <span class="code-live"><i></i> live</span>
+          </div>
+          <pre><code><span class="tok-com">// a quick introduction</span>
+<span class="tok-key">const</span> <span class="tok-fn">priyanshu</span> = {
+  <span class="tok-key">role</span>: <span class="tok-str">"Full Stack Developer"</span>,
+  <span class="tok-key">stack</span>: [<span class="tok-str">"React"</span>, <span class="tok-str">"Node"</span>, <span class="tok-str">"MongoDB"</span>],
+  <span class="tok-key">building</span>: <span class="tok-str">"DevFlow AI"</span>,
+  <span class="tok-key">openTo</span>: <span class="tok-str">"internships &amp; collabs"</span>,
+  <span class="tok-key">shipsTheWholeThing</span>: <span class="tok-bool">true</span>,
+};
+
+<span class="tok-key">export default</span> <span class="tok-fn">priyanshu</span>;</code></pre>
+        </div>
+
+        <span class="float-chip chip-1">React 19</span>
+        <span class="float-chip chip-2">Node + Express</span>
+        <span class="float-chip chip-3">RAG / AI</span>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── MARQUEE ───────────────────────── -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>React</span><span class="outline">Node.js</span><span>Express</span><span class="outline">MongoDB</span><span>Tailwind</span><span class="outline">JavaScript</span><span>Redis</span><span class="outline">Stripe</span><span>Cloudinary</span><span class="outline">RAG</span><span>Git</span><span class="outline">MERN</span>
+        <span>React</span><span class="outline">Node.js</span><span>Express</span><span class="outline">MongoDB</span><span>Tailwind</span><span class="outline">JavaScript</span><span>Redis</span><span class="outline">Stripe</span><span>Cloudinary</span><span class="outline">RAG</span><span>Git</span><span class="outline">MERN</span>
+      </div>
+    </div>
+
+    <!-- ───────────────────────── WORK ───────────────────────── -->
+    <section class="section container" id="work">
+      <div class="section-head reveal">
+        <div>
+          <p class="kicker">01 — Selected work</p>
+          <h2>Things I've built.</h2>
+        </div>
+        <p class="section-note">Three projects.<br />Three different hard problems.</p>
+      </div>
+
+      <div class="projects">
+        <article class="project project-featured reveal" data-tilt>
+          <div class="project-body">
+            <div class="project-top">
+              <span class="project-num">01</span>
+              <span class="badge">Final-year project</span>
+            </div>
+            <h3>DevFlow AI</h3>
+            <p class="project-desc">
+              A project-aware workspace for developers — Kanban tasks, bug tracking,
+              AI code review, and an assistant that answers from your project's own
+              documents using retrieval-augmented generation.
+            </p>
+            <ul class="tags">
+              <li>React 19</li><li>Express 5</li><li>MongoDB</li><li>RAG</li><li>OpenAI-compatible</li>
+            </ul>
+            <a class="project-link" href="https://github.com/py43-cmd/devflow_ai" target="_blank" rel="noopener noreferrer">
+              View repository
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+
+          <div class="art art-1" aria-hidden="true">
+            <div class="art-grid"></div>
+            <div class="art-ring r1"></div>
+            <div class="art-ring r2"></div>
+            <div class="art-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>
+            </div>
+            <span class="art-label">AI / RAG</span>
+          </div>
+        </article>
+
+        <article class="project reveal" data-tilt>
+          <div class="art art-2" aria-hidden="true">
+            <div class="art-grid"></div>
+            <div class="course-stack">
+              <div class="course-row"><span></span><i></i></div>
+              <div class="course-row"><span></span><i></i></div>
+              <div class="course-row"><span></span><i></i></div>
+            </div>
+            <div class="art-icon small">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg>
+            </div>
+          </div>
+          <div class="project-top">
+            <span class="project-num">02</span>
+            <span class="project-kind">LMS</span>
+          </div>
+          <h3>Skill Up</h3>
+          <p class="project-desc">
+            A full-stack learning platform with a curriculum builder, Stripe checkout,
+            Cloudinary video, auto-graded quizzes, and verified certificates.
+          </p>
+          <ul class="tags"><li>React 19</li><li>Stripe</li><li>Cloudinary</li><li>JWT</li></ul>
+          <a class="project-link" href="https://github.com/py43-cmd/skill_up" target="_blank" rel="noopener noreferrer">
+            View repository
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </article>
+
+        <article class="project reveal" data-tilt>
+          <div class="art art-3" aria-hidden="true">
+            <div class="art-grid"></div>
+            <div class="doc doc-back"></div>
+            <div class="doc doc-front">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="art-icon small">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></svg>
+            </div>
+          </div>
+          <div class="project-top">
+            <span class="project-num">03</span>
+            <span class="project-kind">Tool</span>
+          </div>
+          <h3>Convertify</h3>
+          <p class="project-desc">
+            A document suite for Word ↔ PDF conversion and PDF merging — built around
+            strict validation, OCR-aware handling, and automatic temp-file cleanup.
+          </p>
+          <ul class="tags"><li>React</li><li>ConvertAPI</li><li>pdf-lib</li><li>Multer</li></ul>
+          <a class="project-link" href="https://github.com/py43-cmd/convertify" target="_blank" rel="noopener noreferrer">
+            View repository
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── ABOUT ───────────────────────── -->
+    <section class="section container" id="about">
+      <div class="section-head reveal">
+        <div>
+          <p class="kicker">02 — About</p>
+          <h2>I like the part<br />where it gets hard.</h2>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-copy reveal">
+          <p class="about-lead">
+            I'm a final-year CS student who learns by <span class="mark">shipping</span>.
+            Give me a blank repo and a real problem — auth, payments, file pipelines,
+            AI that has to behave — and I'll come back with something that works
+            <em>end to end</em>.
+          </p>
+          <p>
+            Most of what I know came from breaking things in side projects and then
+            fixing them properly: reading the stack trace, tightening the validation,
+            writing the test that would have caught it. I'm looking for internships
+            and collaborations where I can keep doing that with a team.
+          </p>
+        </div>
+
+        <div class="about-side">
+          <ul class="principles">
+            <li class="reveal">
+              <span class="principle-num">01</span>
+              <div>
+                <h3>Own the whole stack</h3>
+                <p>If it ships, I want to understand it — from the React tree to the Express route to the Mongo index.</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span class="principle-num">02</span>
+              <div>
+                <h3>Security is a feature</h3>
+                <p>Validated uploads, hashed passwords, scoped sessions, client-safe errors. Boring on purpose.</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span class="principle-num">03</span>
+              <div>
+                <h3>Make it feel alive</h3>
+                <p>Real loading states, useful motion, and micro-interactions that guide instead of showing off.</p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="now-card reveal">
+            <div class="now-head"><span class="status-dot"></span> Now</div>
+            <ul>
+              <li>Building <strong>DevFlow AI</strong> — final-year project</li>
+              <li>Sharpening testing, system design &amp; RAG</li>
+              <li>Open to internships &amp; freelance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── STACK ───────────────────────── -->
+    <section class="section container" id="stack">
+      <div class="section-head reveal">
+        <div>
+          <p class="kicker">03 — Toolkit</p>
+          <h2>The stack I reach for.</h2>
+        </div>
+        <p class="section-note">Chosen for speed,<br />kept for reliability.</p>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-card reveal">
+          <h3>Languages</h3>
+          <ul class="chips"><li>JavaScript</li><li>C++</li><li>HTML5</li><li>CSS3</li></ul>
+        </div>
+        <div class="stack-card reveal">
+          <h3>Frontend</h3>
+          <ul class="chips"><li>React 19</li><li>Vite</li><li>Tailwind CSS 4</li><li>shadcn/ui</li><li>React Router</li><li>Framer Motion</li><li>Recharts</li><li>Zod</li></ul>
+        </div>
+        <div class="stack-card reveal">
+          <h3>Backend</h3>
+          <ul class="chips"><li>Node.js</li><li>Express 5</li><li>Passport.js</li><li>JWT</li><li>Multer</li><li>Nodemailer</li><li>express-validator</li></ul>
+        </div>
+        <div class="stack-card reveal">
+          <h3>Data</h3>
+          <ul class="chips"><li>MongoDB</li><li>Mongoose</li><li>Redis</li><li>Indexing</li></ul>
+        </div>
+        <div class="stack-card reveal">
+          <h3>AI &amp; integrations</h3>
+          <ul class="chips"><li>OpenAI-compatible APIs</li><li>RAG</li><li>Embeddings</li><li>Stripe</li><li>Cloudinary</li><li>ConvertAPI</li></ul>
+        </div>
+        <div class="stack-card reveal">
+          <h3>Tools</h3>
+          <ul class="chips"><li>Git</li><li>GitHub</li><li>Postman</li><li>VS Code</li><li>npm</li><li>Render</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── CONTACT ───────────────────────── -->
+    <section class="section container" id="contact">
+      <div class="contact-panel reveal">
+        <p class="kicker">04 — Contact</p>
+        <h2>Let's build something<br /><span class="gradient-text">worth shipping.</span></h2>
+        <p class="contact-lede">
+          I'm open to internships, freelance work, and collaborations.
+          Email is the fastest way to reach me — I usually reply within a day.
+        </p>
+
+        <div class="contact-actions">
+          <a class="btn btn-primary btn-lg" href="mailto:py431035@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            py431035@gmail.com
+          </a>
+          <button class="btn btn-ghost btn-lg" type="button" data-copy="py431035@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            Copy email
+          </button>
+        </div>
+
+        <div class="contact-meta">
+          <a href="https://github.com/py43-cmd" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+            github.com/py43-cmd
+          </a>
+          <span class="meta-sep">·</span>
+          <span>Based in India · open to remote</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <p>© <span id="year">2026</span> Priyanshu. Designed &amp; built from scratch.</p>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <!-- ───────────────────────── COMMAND PALETTE ───────────────────────── -->
+  <div class="palette" id="palette" hidden>
+    <div class="palette-backdrop" data-close-palette></div>
+    <div class="palette-panel" role="dialog" aria-modal="true" aria-label="Command menu">
+      <div class="palette-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+        <input id="paletteInput" type="text" placeholder="Jump to a section, project, or link…" autocomplete="off" aria-label="Search commands" />
+        <kbd>esc</kbd>
+      </div>
+      <ul class="palette-list" id="paletteList"></ul>
+      <div class="palette-foot"><span>↑↓ navigate</span><span>↵ select</span><span>ctrl / ⌘ + K</span></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

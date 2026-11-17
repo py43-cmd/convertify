@@ -1,12 +1,30 @@
 import express from 'express';
-import { upload } from '../middlewares/upload.js';
+import { docxSingleUpload, pdfMergeUpload, pdfSingleUpload, cleanupTempDir } from '../middlewares/upload.js';
 import { requireAuth } from '../middlewares/auth.js';
 import { mergePdfs, wordToPdf, pdfToWord } from '../controllers/documentController.js';
 
 const router = express.Router();
 
-router.post('/merge', requireAuth, upload.array('files'), mergePdfs);
-router.post('/word-to-pdf', requireAuth, upload.single('file'), wordToPdf);
-router.post('/pdf-to-word', requireAuth, upload.single('file'), pdfToWord);
+router.post(
+    '/merge',
+    cleanupTempDir,
+    requireAuth,
+    pdfMergeUpload,
+    mergePdfs
+);
+router.post(
+    '/word-to-pdf',
+    cleanupTempDir,
+    requireAuth,
+    docxSingleUpload,
+    wordToPdf
+);
+router.post(
+    '/pdf-to-word',
+    cleanupTempDir,
+    requireAuth,
+    pdfSingleUpload,
+    pdfToWord
+);
 
 export default router;

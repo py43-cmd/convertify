@@ -7,6 +7,14 @@ import ToolTabs from "./ToolTabs";
 import UploadCard from "./UploadCard";
 import FileList from "./FileList";
 import ActionButton from "./ActionButton";
+import { buildDownloadName, saveBlob, submitConversion, validateSelection, MAX_MERGE_FILES, MAX_UPLOAD_BYTES } from "@/lib/download";
+import { apiUrl } from "@/lib/api";
+
+const ENDPOINTS = {
+    merge: apiUrl("/api/merge"),
+    "word-to-pdf": apiUrl("/api/word-to-pdf"),
+    "pdf-to-word": apiUrl("/api/pdf-to-word"),
+};
 
 export default function PdfConverter({ user, setAuthModal, authLoading }) {
     const [files, setFiles] = useState([]);
@@ -14,83 +22,66 @@ export default function PdfConverter({ user, setAuthModal, authLoading }) {
     const [loading, setLoading] = useState(false);
 
     const handleFileSelect = (e) => {
-        const selectedFiles = Array.from(e.target.files);
+        const { files: selectedFiles, error } = validateSelection(
+            e.target.files,
+            activeTool,
+            { maxBytes: MAX_UPLOAD_BYTES, maxMergeFiles: MAX_MERGE_FILES, existingCount: files.length }
+        );
+
+        if (error) {
+            toast.error(error);
+            return;
+        }
 
         if (selectedFiles.length === 0) return;
 
         if (activeTool === "merge") {
             setFiles((prev) => [...prev, ...selectedFiles]);
-            toast.success(`Added ${selectedFiles.length} file(s) for merging!`);
+            toast.success(`Added ${selectedFiles.length} file${selectedFiles.length === 1 ? "" : "s"} for merging.`);
         } else {
             setFiles(selectedFiles);
-            toast.success(`File ready for conversion!`);
+            toast.success("File ready for conversion.");
         }
     };
 
     const removeFile = (index) => {
-        setFiles(files.filter((_, i) => i !== index));
+        setFiles((prev) => prev.filter((_, i) => i !== index));
     };
 
     const handleConvert = async () => {
         if (files.length === 0) {
-            toast.error("Please upload a file first!");
+            toast.error("Please upload a file first.");
             return;
         }
 
         if (activeTool === "merge" && files.length < 2) {
-            toast.error("Please upload at least 2 files to merge!");
+            toast.error("Please upload at least 2 files to merge.");
             return;
         }
+
+        if (loading) return;
 
         setLoading(true);
         const id = toast.loading("Uploading and processing your files...");
 
         const formData = new FormData();
-        let endpoint = "";
+        const endpoint = ENDPOINTS[activeTool];
 
         if (activeTool === "merge") {
-            endpoint = "/api/merge";
             files.forEach((file) => formData.append("files", file));
-        } else if (activeTool === "word-to-pdf") {
-            endpoint = "/api/word-to-pdf";
-            formData.append("file", files[0]);
-        } else if (activeTool === "pdf-to-word") {
-            endpoint = "/api/pdf-to-word";
+        } else {
             formData.append("file", files[0]);
         }
 
         try {
-            const response = await fetch(endpoint, {
-                method: "POST",
-                body: formData,
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.error || "Failed to process files");
-            }
-
-            // Trigger file download natively in browser
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-
-            const ext = activeTool === "pdf-to-word" ? ".docx" : ".pdf";
-            const defaultName = activeTool === "merge" ? "merged_document" : (files[0].name.split(".")[0] + "_converted");
-
-            a.download = defaultName + ext;
-            document.body.appendChild(a);
-            a.click();
-
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-
-            setFiles([]); // Clear queue after success
-            toast.success("All Done! File processed and downloaded.", { id });
+            const fallbackName = buildDownloadName(activeTool, files[0]?.name || "document");
+            const { blob, filename } = await submitConversion({ endpoint, formData, fallbackName });
+            saveBlob({ blob, filename });
+            setFiles([]);
+            toast.success("All done! Your file is downloading.", { id });
         } catch (error) {
             console.error("Conversion error:", error);
-            toast.error(error.message || "An error occurred during conversion", { id });
+            toast.error(error.message || "An error occurred during conversion.", { id });
         } finally {
             setLoading(false);
         }
@@ -158,9 +149,9 @@ export default function PdfConverter({ user, setAuthModal, authLoading }) {
                                 </div>
 
                                 <div className="space-y-2.5 max-w-md mx-auto">
-                                    <h3 className="text-2xl font-extrabold bg-gradient-to-r from-slate-950 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+                                    <h2 className="text-2xl font-extrabold bg-gradient-to-r from-slate-950 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
                                         Unlock Document Tools
-                                    </h3>
+                                    </h2>
                                     <p className="text-sm md:text-base font-medium text-slate-500 dark:text-slate-400 leading-relaxed">
                                         Join Convertify to convert Word files to PDF, merge documents, or extract content. Sign in to get started instantly.
                                     </p>
